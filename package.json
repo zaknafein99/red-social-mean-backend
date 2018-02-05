@@ -1,0 +1,31 @@
+{
+  "name": "red-social-mean-backend",
+  "version": "1.0.0",
+  "description": "Backend de red social usando MEAN",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaknafein99/red-social-mean-backend.git"
+  },
+  "author": "Ismael Marquez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zaknafein99/red-social-mean-backend/issues"
+  },
+  "homepage": "https://github.com/zaknafein99/red-social-mean-backend#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "connect-multiparty": "^2.1.0",
+    "express": "^4.16.2",
+    "jwt-simple": "^0.5.1",
+    "moment": "^2.20.1",
+    "mongoose": "^5.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.12"
+  }
+}
