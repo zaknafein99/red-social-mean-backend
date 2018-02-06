@@ -28,19 +28,33 @@ function saveUser(req, res){
         user.role = 'ROLE_USER';
         user.image = null;
 
-        bcrypt.hash(params.password, null, null, (err, hash) => {
-            user.password = hash;
+        // Controlar usuarios duplicados
+        User.find({ $or: [
+                            {email: user.email.toLowerCase()},
+                            {nick: user.nick.toLowerCase()},
+                        ]}).exec((err, users) => {
+                            if(err) return res.status(500).send({message: 'Error en la petición de usuarios'});
+                            if(users.length >= 1) {
+                                return res.status(200).send({message: 'El usuario que intentas registrar ya existe'});
+                            }else{
+                                // Ciffra la password y guarda los datos
+                                bcrypt.hash(params.password, null, null, (err, hash) => {
+                                    user.password = hash;
 
-            user.save((err, userStored) => {
-                if(err) return res.status(500).send({message: 'Error al guardar el usuario'});
+                                    user.save((err, userStored) => {
+                                        if(err) return res.status(500).send({message: 'Error al guardar el usuario'});
 
-                if(userStored){
-                    res.status(200).send({user: userStored})
-                }else{
-                    res.status(404).send({message: 'No se ha registrado el usuario'})
-                }
-            });
-        });
+                                        if(userStored){
+                                            res.status(200).send({user: userStored})
+                                        }else{
+                                            res.status(404).send({message: 'No se ha registrado el usuario'})
+                                        }
+                                    });
+                                });
+                            }
+                        });
+
+        
 
     }else{
         res.status(200)({
