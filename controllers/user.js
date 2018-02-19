@@ -187,7 +187,7 @@ function uploadImage(req, res){
         var file_ext = ext_split[1];
 
         if(userId != req.user.sub){
-            removeFilesOfUploads(res, file_path, 'No tienes permiso para actualizar los datos del usuario');            
+            return removeFilesOfUploads(res, file_path, 'No tienes permiso para actualizar los datos del usuario');            
         }
 
         if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg' ){
@@ -199,7 +199,7 @@ function uploadImage(req, res){
 		return res.status(200).send({user: userUpdated});
 		})
         }else{
-            removeFilesOfUploads(res, file_path, 'Extensión no válida');            
+            return removeFilesOfUploads(res, file_path, 'Extensión no válida');            
         }
 
     }else{
@@ -213,6 +213,19 @@ function removeFilesOfUploads(res, file_path, message){
     });
 }
 
+function getImageFile(req, res){
+	var image_file = req.params.imageFile;
+	var path_file = './uploads/users/'+image_file;
+
+	fs.exists(path_file, (exists) => {
+		if(exists){
+			res.sendFile(path.resolve(path_file));
+		}else{
+			res.status(200).send({message: 'No existe la imagen'});
+		}
+	});
+}
+
 module.exports= {
     home,
     pruebas,
@@ -222,4 +235,5 @@ module.exports= {
     getUsers,
     updateUser,
     uploadImage,
+    getImageFile
 }
