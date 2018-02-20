@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var User = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
@@ -78,7 +78,6 @@ function loginUser(req, res){
         if(user){
             bcrypt.compare(password, user.password, (err, check) => {
                 if(check){
-                    
                     if(params.gettoken){
                         // Devolver y devolver el token
                         return res.status(200).send({
@@ -192,12 +191,12 @@ function uploadImage(req, res){
 
         if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg' ){
             // Actualizar documento de usuario logueado
-		User.findByIdAndUpdate(userId, {image: file_name}, {new: true}, (err, userUpdated) =>{
+            User.findByIdAndUpdate(userId, {image: file_name}, {new: true}, (err, userUpdated) =>{
 
         	if(err) return res.status(500).send({message: 'Error en la petición'});
-		if(!userUpdated) return res.status(404).send({message: 'No se ha podido actualizar el usuario'});
-		return res.status(200).send({user: userUpdated});
-		})
+            if(!userUpdated) return res.status(404).send({message: 'No se ha podido actualizar el usuario'});
+            return res.status(200).send({user: userUpdated});
+        })
         }else{
             return removeFilesOfUploads(res, file_path, 'Extensión no válida');            
         }
@@ -214,16 +213,16 @@ function removeFilesOfUploads(res, file_path, message){
 }
 
 function getImageFile(req, res){
-	var image_file = req.params.imageFile;
-	var path_file = './uploads/users/'+image_file;
+    var image_file = req.params.imageFile;
+    var path_file = './uploads/users/'+image_file;
 
-	fs.exists(path_file, (exists) => {
-		if(exists){
-			res.sendFile(path.resolve(path_file));
-		}else{
-			res.status(200).send({message: 'No existe la imagen'});
-		}
-	});
+    fs.exists(path_file, (exists) => {
+    if(exists){
+            res.sendFile(path.resolve(path_file));
+        }else{
+            res.status(200).send({message: 'No existe la imagen'});
+        }
+    });
 }
 
 module.exports= {

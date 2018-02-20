@@ -1,4 +1,5 @@
-'use strict'
+/*jslint node: true */
+'use strict';
 
 var express = require('express');
 var bodyParser = require('body-parser');
