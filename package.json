@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint."
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "connect-multiparty": "^2.1.0",
-    "eslint": "^4.17.0",
+    "eslint": "^4.18.1",
     "express": "^4.16.2",
     "jslint": "^0.12.0",
     "jwt-simple": "^0.5.1",
