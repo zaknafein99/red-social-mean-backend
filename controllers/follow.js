@@ -9,7 +9,7 @@ var Follow = require('../models/follow');
 
 function saveFollow(req, res){
     var params = req.body;
-    
+
     var follow = new Follow();
     follow.user = req.user.sub;
     follow.followed = params.followed;
@@ -26,6 +26,7 @@ function saveFollow(req, res){
 function deleteFollow(req, res){
 	// Id del usuario que vamos a cambiar su follow
 	var userId = req.user.sub;
+
 	// Id del usuario que vamos a dejar de seguir, se los pasamos por URL
 	var followId = req.params.id;
 
@@ -44,7 +45,7 @@ function getFollowingUsers(req, res){
 	}
 
 	var page = 1;
-	
+
 	if(req.params.page){
 		page = req.params.page;
 	}else{
@@ -68,9 +69,9 @@ function getFollowingUsers(req, res){
 }
 
 function getFollowedUsers(req, res){
-    
+
     var userId = req.user.sub;
-    
+
     if(req.params.id && req.params.page){
 	    userId = req.params.id;
     }
