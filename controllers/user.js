@@ -173,7 +173,7 @@ function uploadImage(req, res){
         // Separo la ruta del nombre de archivo
         var file_split = file_path.split('/');
         console.log(file_split);
-        
+
         // Cargo solo el nombre del archivo
         var file_name = file_split[2];
         console.log(file_name);
@@ -182,12 +182,12 @@ function uploadImage(req, res){
         var ext_split = file_name.split('\.');
 
         console.log(ext_split);
-        
+
         // Cargo la extensión en una variable
         var file_ext = ext_split[1];
 
         if(userId != req.user.sub){
-            return removeFilesOfUploads(res, file_path, 'No tienes permiso para actualizar los datos del usuario');            
+            return removeFilesOfUploads(res, file_path, 'No tienes permiso para actualizar los datos del usuario');
         }
 
         if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg' ){
@@ -199,7 +199,7 @@ function uploadImage(req, res){
             return res.status(200).send({user: userUpdated});
         })
         }else{
-            return removeFilesOfUploads(res, file_path, 'Extensión no válida');            
+            return removeFilesOfUploads(res, file_path, 'Extensión no válida');
         }
 
     }else{
