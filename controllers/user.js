@@ -52,9 +52,9 @@ function saveUser(req, res){
                                         if(err) return res.status(500).send({message: 'Error al guardar el usuario'});
 
                                         if(userStored){
-                                            res.status(200).send({user: userStored})
+                                            res.status(200).send({user: userStored});
                                         }else{
-                                            res.status(404).send({message: 'No se ha registrado el usuario'})
+                                            res.status(404).send({message: 'No se ha registrado el usuario'});
                                         }
                                     });
                                 });
