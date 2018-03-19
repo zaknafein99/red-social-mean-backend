@@ -26,6 +26,7 @@ function saveFollow(req, res){
 function deleteFollow(req, res){
 	// Id del usuario que vamos a cambiar su follow
 	var userId = req.user.sub;
+
 	// Id del usuario que vamos a dejar de seguir, se los pasamos por URL
 	var followId = req.params.id;
 
