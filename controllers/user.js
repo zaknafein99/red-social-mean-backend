@@ -119,6 +119,25 @@ function getUser(req, res){
     });
 }
 
+async function followThisUser(identity_user_id, user_id){
+    
+    var following = await Follow.findOne({"user":identity_user_id, "followed":user_id}).exec((err, follow) => {
+        if(err) return handleError(err);
+        return follow;
+        });
+
+    var followed = await Follow.findOne({"user":user_id, "followed":identity_user_id}).exec((err, follow) => {
+        if(err) return handleError(err);
+        return follow;
+    });
+
+    return {
+        following: following,
+        followed: followed
+    }
+
+}
+
 // Devolver un listado de usuarios paginados
 function getUsers(req, res){
     var identity_user_id = req.user.sub;
